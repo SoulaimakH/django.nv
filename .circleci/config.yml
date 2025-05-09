@@ -7,6 +7,8 @@ jobs:
       - run: |                              # similar to "script" in GitLab
           pip install -r requirements.txt
           python manage.py check
+          when: on_fail 
+          
 
   test:
     docker:
@@ -16,6 +18,7 @@ jobs:
       - run: |
           pip install -r requirements.txt
           python manage.py test taskManager
+          when: on_fail 
 
   integration:
     docker:
