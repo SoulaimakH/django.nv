@@ -12,6 +12,15 @@ jobs:
       - image: python:3.6
     steps:
       - checkout
+      
+  release:
+    machine: true                                        # What is this for?
+    steps:
+      - checkout
+
+      - run: |
+          docker build -t $DOCKER_USERNAME/django.nv .   # Build the application into Docker image
+          docker push $DOCKER_USERNAME/django.nv         # Push the image into registry      
 
   integration:
     docker:
