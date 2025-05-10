@@ -4,10 +4,13 @@ jobs:
       - image: python:3.6                   # similar to "image" in GitLab
     steps:
       - checkout
-      - run: |                              # similar to "script" in GitLab
-          pip install -r requirements.txt
-          python manage.py check  
-          when: on_fail
+      - run: 
+          command: |                              # similar to "script" in GitLab
+            pip install -r requirements.txt
+            python manage.py check  
+          when: on_fail  
+            
+          
 
   test:
     docker:
