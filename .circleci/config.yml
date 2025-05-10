@@ -66,6 +66,13 @@ workflows:
             branches:
               only:
                 - main
+      - release:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - main                
       - integration:
           requires:
             - test
