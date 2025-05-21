@@ -7,7 +7,16 @@ jobs:
       - run: |                              # similar to "script" in GitLab
           pip install -r requirements.txt
           python manage.py check
+  secret_scanning:
+    machine: true
+    steps:
+      - checkout
 
+      - run: docker run --rm -v $(pwd):/src hysnsec/trufflehog filesystem /src --json > trufflehog-output.json
+
+      - store_artifacts:
+          path: trufflehog-output.json
+          destination: trufflehog-artifact
   test:
     docker:
       - image: python:3.6
